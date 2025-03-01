@@ -19,22 +19,76 @@ export class LinkedList {
   // EASY: Append a value to the end of the list
   append(value: number): void {
     // TODO: Implement append method
+    let curr = this.head;
+
+    if(curr !== null){
+      while(curr.next !== null){
+        curr = curr.next;
+      }
+      curr.next = new ListNode(value);
+      return;
+    }
+
+    curr = new ListNode(value);
+    this.head = curr;
   }
 
   // EASY: Find a value in the list
   find(value: number): boolean {
+    
     // TODO: Implement find method
+    let curr = this.head;
+    while(curr !== null){
+      //console.log(curr.value);
+      if(curr.value === value){
+        return true;
+      }
+      curr = curr.next;
+    }
     return false;
   }
 
   // MEDIUM: Reverse the linked list
   reverse(): void {
-    // TODO: Implement reverse method
+    // if(this.head === null){
+    //   return;
+    // }
+    //let newHead = this.head;
+    let curr = this.head;
+    this.head = null;
+    while(curr !== null){
+      let next = curr.next;
+      //console.log(next);
+      let prevHead = this.head;
+      this.head = curr;
+      this.head.next = prevHead;
+      curr = next;
+    }
+    //this.print();
   }
 
   // MEDIUM: Remove a node by value
   remove(value: number): void {
     // TODO: Implement remove method
+    let curr = this.head;
+    while(curr !== null){
+      
+      if(curr.next !== null && curr.next.value === value){
+        curr.next = curr.next.next;
+        break;
+      }
+      curr = curr.next;
+    }
+    //this.print();
+  }
+
+  print(){
+    let curr = this.head;
+    while(curr !== null){
+      console.log("value: ", curr.value);
+      //console.log(curr);
+      curr = curr.next;
+    }
   }
 }
 
